@@ -1,0 +1,27 @@
+version: "3"
+
+volumes:
+    chessbot:
+    sqlite:
+
+services:
+  chessbot:
+    container_name: chessbot
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./chessbot:/chessbot
+      - ./db/:/db/
+    environment:
+      - TOKEN=
+      - DB_PATH=sqlite:///db/
+    depends_on:
+      - sqlite
+  
+  sqlite:
+    image: keinos/sqlite3
+    container_name: sqlite
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./db/:/db/

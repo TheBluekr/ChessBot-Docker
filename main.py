@@ -1,0 +1,3 @@
+import chessbot
+
+chessbot.main()
